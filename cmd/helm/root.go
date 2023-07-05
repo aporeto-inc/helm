@@ -54,6 +54,7 @@ Environment variables:
 | $HELM_DRIVER                       | set the backend storage driver. Values are: configmap, secret, memory, sql.                       |
 | $HELM_DRIVER_SQL_CONNECTION_STRING | set the connection string the SQL storage driver should use.                                      |
 | $HELM_MAX_HISTORY                  | set the maximum number of helm release history.                                                   |
+| $HELM_SECRETS_PAGE_SIZE            | set the maximun number of secrets retrieved per API call.                                                   |
 | $HELM_NAMESPACE                    | set the namespace used for the helm operations.                                                   |
 | $HELM_NO_PLUGINS                   | disable plugins. Set HELM_NO_PLUGINS=1 to disable plugins.                                        |
 | $HELM_PLUGINS                      | set the path to the plugins directory                                                             |
