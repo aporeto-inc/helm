@@ -366,7 +366,7 @@ func (cfg *Configuration) recordRelease(r *release.Release) {
 }
 
 // Init initializes the action configuration
-func (cfg *Configuration) Init(getter genericclioptions.RESTClientGetter, namespace, helmDriver string, log DebugLog) error {
+func (cfg *Configuration) Init(getter genericclioptions.RESTClientGetter, namespace string, pageSize int, helmDriver string, log DebugLog) error {
 	kc := kube.New(getter)
 	kc.Log = log
 
@@ -379,6 +379,7 @@ func (cfg *Configuration) Init(getter genericclioptions.RESTClientGetter, namesp
 	switch helmDriver {
 	case "secret", "secrets", "":
 		d := driver.NewSecrets(newSecretClient(lazyClient))
+		d.SecretsPageSize = pageSize
 		d.Log = log
 		store = storage.Init(d)
 	case "configmap", "configmaps":
