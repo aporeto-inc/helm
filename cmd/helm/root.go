@@ -47,6 +47,7 @@ Environment variables:
 
 | Name                               | Description                                                                                                |
 |------------------------------------|------------------------------------------------------------------------------------------------------------|
+| $HELM_SECRETS_PAGE_SIZE            | set the maximun number of secrets retrieved per API call.                                                  |
 | $HELM_CACHE_HOME                   | set an alternative location for storing cached files.                                                      |
 | $HELM_CONFIG_HOME                  | set an alternative location for storing Helm configuration.                                                |
 | $HELM_DATA_HOME                    | set an alternative location for storing Helm data.                                                         |

@@ -41,6 +41,9 @@ import (
 // defaultMaxHistory sets the maximum number of releases to 0: unlimited
 const defaultMaxHistory = 10
 
+// defaultSecretsPageSize sets the maximum number of secrets to retrieve per api calls
+const defaultSecretsPageSize = 50
+
 // defaultBurstLimit sets the default client-side throttling limit
 const defaultBurstLimit = 100
 
@@ -84,6 +87,8 @@ type EnvSettings struct {
 	PluginsDirectory string
 	// MaxHistory is the max release history maintained.
 	MaxHistory int
+	// SecretsPageSize is the number of secrets to retrieve per api calls
+	SecretsPageSize int
 	// BurstLimit is the default client-side throttling limit.
 	BurstLimit int
 	// QPS is queries per second which may be used to avoid throttling.
@@ -94,6 +99,7 @@ func New() *EnvSettings {
 	env := &EnvSettings{
 		namespace:                 os.Getenv("HELM_NAMESPACE"),
 		MaxHistory:                envIntOr("HELM_MAX_HISTORY", defaultMaxHistory),
+		SecretsPageSize:           envIntOr("HELM_SECRETS_PAGE_SIZE", defaultSecretsPageSize),
 		KubeContext:               os.Getenv("HELM_KUBECONTEXT"),
 		KubeToken:                 os.Getenv("HELM_KUBETOKEN"),
 		KubeAsUser:                os.Getenv("HELM_KUBEASUSER"),
@@ -220,6 +226,7 @@ func (s *EnvSettings) EnvVars() map[string]string {
 		"HELM_REPOSITORY_CONFIG": s.RepositoryConfig,
 		"HELM_NAMESPACE":         s.Namespace(),
 		"HELM_MAX_HISTORY":       strconv.Itoa(s.MaxHistory),
+		"HELM_SECRETS_PAGE_SIZE": strconv.Itoa(s.SecretsPageSize),
 		"HELM_BURST_LIMIT":       strconv.Itoa(s.BurstLimit),
 		"HELM_QPS":               strconv.FormatFloat(float64(s.QPS), 'f', 2, 32),
 
